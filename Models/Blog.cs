@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace wk10checkpoint.Models
 {
-   public class Blogs
+   public class Blog
    {
        public int Id { get; set; }
        [Required]
@@ -12,6 +12,7 @@ namespace wk10checkpoint.Models
        public string ImgUrl { get; set; } 
        public bool Published { get; set; }
        public string CreatorId { get; set; }
+       public Profile Creator{ get; set; }
 
 
     } 

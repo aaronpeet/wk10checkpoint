@@ -25,7 +25,7 @@ namespace wk10checkpoint.Repositories
             ";
             return _db.Query<Profile, Blog, Blog>(sql, (profile, blog) =>
             {
-                blog.CreatorId = profile;
+                blog.Creator = profile;
                 return blog;
             }, splitOn: "id").ToList();
         }
