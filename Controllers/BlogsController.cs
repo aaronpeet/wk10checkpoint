@@ -27,12 +27,63 @@ namespace wk10checkpoint.Controllers
             {
                 List<Blog> blogs = _blogsService.Get();
                 return Ok(blogs);
-    }
+           }
             catch (Exception error)
             {
                 
                return BadRequest(error.Message);
-    }
+           }
+        }
+
+        [HttpGet("{id}")]
+
+        public ActionResult<Blog> Get(int id)
+        {
+            try
+            {
+                Blog blog = _blogsService.Get(id);
+                return Ok(blog);
+            }
+            catch (Exception error)
+            {
+
+                return BadRequest(error.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<Blog>> Create([FromBody] Blog newBlog)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                newBlog.CreatorId = userInfo.Id;
+                Blog blog = _blogsService.Create(newBlog);
+                return Ok(blog);
+            }
+            catch (Exception error)
+            {
+
+                return BadRequest(error.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<ActionResult<String>> Delete(int id)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                _blogsService.Delete(id, userInfo.Id);
+                return Ok("Successfully Delorted");
+            }
+            catch (Exception error)
+            {
+
+                return BadRequest(error.Message);
+            }
         }
 
     }
