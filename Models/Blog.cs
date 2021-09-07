@@ -8,6 +8,8 @@ namespace wk10checkpoint.Models
        [Required]
        [MaxLength(20)]
        public string Title { get; set; }
+       [Required]
+       [MaxLength(240)]
        public string Body { get; set; }
        public string ImgUrl { get; set; } 
        public bool Published { get; set; }
