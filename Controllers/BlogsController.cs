@@ -69,6 +69,22 @@ namespace wk10checkpoint.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        public ActionResult<Blog> Edit([FromBody] Blog updatedBlog, int id)
+        {
+            try
+            {
+                updatedBlog.Id = id;
+                Blog blog = _blogsService.Edit(updatedBlog);
+                return Ok(blog);
+            }
+            catch (Exception error)
+            {
+
+                return BadRequest(error.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<ActionResult<String>> Delete(int id)

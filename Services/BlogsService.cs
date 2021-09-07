@@ -33,6 +33,16 @@ namespace wk10checkpoint.Services
             return _repo.Create(newBlog);
         }
 
+        internal Blog Edit(Blog updatedBlog)
+        {
+            Blog original = Get(updatedBlog.Id);
+            updatedBlog.Title = updatedBlog.Title != null ? updatedBlog.Title : original.Title;
+            updatedBlog.Body = updatedBlog.Body != null ? updatedBlog.Body : original.Body;
+            updatedBlog.ImgUrl = updatedBlog.ImgUrl != null ? updatedBlog.ImgUrl : original.ImgUrl;
+            updatedBlog.Published = updatedBlog.Published ? updatedBlog.Published : original.Published;
+            return _repo.Update(updatedBlog);
+        }
+
         internal void Delete(int blogId, string userId)
         {
             Blog blogDelete = Get(blogId);

@@ -60,6 +60,20 @@ namespace wk10checkpoint.Repositories
             return Get(id);
         }
 
+        internal Blog Update(Blog updatedBlog)
+        {
+            string sql = @"
+            UPDATE blogs
+            SET
+            title = @Title,
+            body = @Body,
+            imgUrl = @ImgUrl,
+            published = @Published;
+            ";
+            _db.Execute(sql, updatedBlog);
+            return updatedBlog;
+        }
+
         internal void Delete(int id)
         {
             string sql = "DELETE FROM blogs WHERE id = @id LIMIT 1";
